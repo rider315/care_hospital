@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+{% extends "basic_app/base.html" %}
+{% load static %}
+
+  {% block body_block %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+ <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/3c35f8069e.js" crossorigin="anonymous"></script>
+
+	<header>
+        
+
+	<main>
+        <style>
+            .row1{
+                display: flex;
+                justify-content: space-between;
+            }
+            .what-heading{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .what-heading h2{
+                font-size: 4rem;
+                width: 20rem;
+            }
+            .what-heading p{
+                width: 20rem;
+            }
+            .what-we-do-card{
+                border: 2px solid #1C3F3A;
+                padding: 1rem;
+                width: 20rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .what-we-do-card:hover{
+                scale: 110%;
+                transition: all 0.3s;
+                background-color: #9CF5E9;
+            }
+
+            .card-icon{
+                display: flex;
+                justify-content: flex-start;
+            }
+            .card-heading{
+                font-size: 2rem;
+                color: black;
+                text-align: start;
+            }
+            .card-description{
+                font-size: 1rem;
+                color: #444;
+            }
+            .card-icon1{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 100%;
+                border: 2px solid #1C3F3A;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #1C3F3A;
+            }
+
+            .con1{
+                padding-bottom: 10rem;
+            }
+
+            main .right-sec{
+                padding-right: 110px;
+            }
+
+
+            main .left-sec{
+                padding-left: 100px;
+                margin-right: 50px;
+            }
+
+
+            @media screen and (max-width: 480px) {
+                .right-sec{
+                    display: none;
+                }
+                #news{
+                    display: none;
+                }
+                .row1{
+                    flex-direction: column;
+                }
+                h1{
+                    font-size: 1rem;
+                }
+                main .left-sec{
+                    padding-left: 10px;
+                    margin-right: 10px;
+                }
+            }
+
+/* Changed color scheme */
+:root {
+    --primary-color: #2A2A54;    /* Deep navy blue */
+    --secondary-color: #4169E1;  /* Royal blue */
+    --accent-color: #FF6B6B;     /* Coral red */
+    --light-bg: #E6F0FF;         /* Light blue background */
+}
+
+/* Update all color references */
+.what-we-do-card {
+    border: 2px solid var(--primary-color);
+}
+
+.what-we-do-card:hover {
+    background-color: var(--light-bg);
+}
+
+.card-icon1 {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+#aboutus {
+    background-color: #F8F9FA;  /* Lighter gray */
+}
+
+.btn {
+    background-color: var(--primary-color) !important;
+}
+
+/* Update SVG colors */
+svg path {
+    fill: var(--primary-color);
+}
+
+.fa-briefcase-medical {
+    color: var(--primary-color);
+}
+
+/* Update text colors */
+h2, h1 {
+    color: var(--primary-color);
+}
+
+.button3 {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.button3:hover {
+    background: var(--accent-color);
+}
+
+
+/* Changed color scheme */
+:root {
+    --primary-color: #2E7D32;    /* Forest Green */
+    --secondary-color: #4CAF50;  /* Lime Green */
+    --accent-color: #FF9800;     /* Orange */
+    --light-bg: #E8F5E9;         /* Light Green background */
+}
+
+/* Update all color references */
+.what-we-do-card {
+    border: 2px solid var(--primary-color);
+}
+
+.what-we-do-card:hover {
+    background-color: var(--light-bg);
+}
+
+.card-icon1 {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+#aboutus {
+    background-color: #F8F9FA;  /* Keeping this light gray */
+}
+
+.btn {
+    background-color: var(--primary-color) !important;
+}
+
+/* Update SVG colors */
+svg path {
+    fill: var(--primary-color);
+}
+
+.fa-briefcase-medical {
+    color: var(--primary-color);
+}
+
+/* Update text colors */
+h2, h1 {
+    color: var(--primary-color);
+}
+
+.button3 {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.button3:hover {
+    background: var(--accent-color);
+}
+/* Changed color scheme */
+:root {
+    --primary-color: #2E7D32;    /* Forest Green */
+    --secondary-color: #4CAF50;  /* Lime Green */
+    --accent-color: #FF9800;     /* Orange */
+    --light-bg: #E8F5E9;         /* Light Green */
+}
+
+/* Update all color references */
+.what-we-do-card {
+    border: 2px solid var(--primary-color);
+    background-color: white; /* Default background */
+}
+
+.what-we-do-card:hover {
+    background-color: var(--light-bg); /* Light green on hover */
+}
+
+.card-icon1 {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent; /* Ensure circle has no conflicting bg */
+}
+
+#aboutus {
+    background-color: var(--light-bg); /* Changed from hardcoded #F8F9FA */
+}
+
+/* Update the hardcoded background color in contact button */
+#contactus .btn {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+/* Update SVG colors */
+svg path {
+    fill: var(--primary-color);
+}
+
+.fa-briefcase-medical {
+    color: var(--primary-color);
+}
+
+/* Update text colors */
+h2, h1 {
+    color: var(--primary-color);
+}
+
+.button3 {
+    background: var(--secondary-color);
+    color: rgb(11, 37, 8);
+}
+
+.button3:hover {
+    background: var(--accent-color);
+}
+
+/* Override any hardcoded section backgrounds */
+section#something {
+    background-color: rgb(190, 252, 205); /* Default for 'what we offer' section */
+}
+
+section#contactus {
+    background-color: var(--dark-bg); /* Light green for contact section */
+}
+
+/* Fix the hardcoded background in about us section */
+section[style*="background-color:#D3D3D3"] {
+    background-color: var(--light-bg) !important; /* Override inline style */
+}
+        </style>
+  <section class="left-sec">
+   <h2> We Are Here For Your Care</h2>
+   <h1> Your health,</h1>
+   <h1> our top doctors.</h1>
+   <h5> 3C Complete Care Companion, we are committed to revolutionizing healthcare by making medical services more accessible, efficient, and reliable. Our advanced healthcare app provides seamless, fast, and accurate online medical assistance, ensuring timely diagnoses, expert consultations, and personalized health recommendations. Designed to enhance patient care, our platform leverages AI-driven insights to offer dependable medical guidance, real-time health monitoring, and medication reminders. With a strong focus on improving healthcare accessibility, we empower individuals to take control of their well-being while easing the burden on medical professionals.
+
+
+
+
+
+
+
+   </h5>
+   <!-- <hr> -->
+   <p> </p>
+   <button class="button button3">
+     Discover More
+   </button>
+  </section>
+
+  <section class="right-sec">
+   <figure>
+    <img src="/static/images/heros5.png/" id="img">
+    <!-- <img src="{% static "images/hero.png/" %}" id="img"> -->
+   </figure>
+  </section>
+ </main>
+ </header>
+ <body>
+    <div class="gap-2 flex fixed bottom-0 m-6 z-20">
+      
+    </div>
+
+    <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/8f657ee8-ef58-4535-bafe-cb2b525d988a/webchat/v2.1/config.js"></script>
+  </body>
+
+
+ <!-- something nice -->
+ <section class="header-extradiv" id="something">
+ 	<div class="container con1">
+        <div class="what-heading">
+            <h2 class="text-center font-weight-bold mb-10" id="h">What We Offer</h2>
+            <p>Comprehensive care tailored to your needs, ensuring you're supported every step of the way on your health journey.</p>
+        </div>
+
+ 		<div class="row1">
+ 			<div class="what-we-do-card">
+                <div class="card-icon">
+                    <svg width="52" height="70" viewBox="0 0 52 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.8571 57.2833H37.1429C37.6728 57.2833 38.1148 57.0993 38.4689 56.7311C38.8229 56.363 39 55.9002 39 55.3428C39 54.7854 38.8229 54.3226 38.4689 53.9544C38.1148 53.5863 37.6728 53.4009 37.1429 53.3983H14.8571C14.3297 53.3983 13.8877 53.5837 13.5311 53.9544C13.1746 54.3252 12.9975 54.788 13 55.3428C13.0025 55.8976 13.1795 56.3591 13.5311 56.7272C13.8828 57.0954 14.3248 57.282 14.8571 57.2872M14.8571 47.1139H37.1429C37.6728 47.1139 38.1148 46.9285 38.4689 46.5578C38.8229 46.187 39 45.7256 39 45.1733C39 44.6211 38.8229 44.1583 38.4689 43.785C38.1148 43.4117 37.6728 43.2263 37.1429 43.2289H14.8571C14.3297 43.2289 13.8877 43.4143 13.5311 43.785C13.1746 44.1557 12.9975 44.6185 13 45.1733C13.0025 45.7281 13.1795 46.1896 13.5311 46.5578C13.8828 46.9259 14.3248 47.1126 14.8571 47.1178M26 17.0217C25.0194 15.7513 24.0797 14.7156 23.1809 13.9144C22.2845 13.1133 20.9956 12.7128 19.3143 12.7128C17.5611 12.7128 16.0705 13.3557 14.8423 14.6417C13.6141 15.9302 13 17.4922 13 19.3278C13 22.5141 14.326 25.3218 16.978 27.7511C19.63 30.183 21.9675 32.3607 23.9906 34.2844C24.5304 34.8496 25.2002 35.1322 26 35.1322C26.7998 35.1322 27.4684 34.8509 28.0057 34.2883L35.022 27.7939C37.674 25.3309 39 22.5063 39 19.32C39 17.4844 38.3859 15.9237 37.1577 14.6378C35.9295 13.3518 34.4389 12.7115 32.6857 12.7167C31.0044 12.7167 29.7155 13.1172 28.8191 13.9183C27.9203 14.7169 26.9806 15.7487 26 17.0217ZM45.9977 70H6.00229C4.29124 70 2.86371 69.4011 1.71971 68.2033C0.575714 67.0055 0.00247619 65.5109 0 63.7194V6.28055C0 4.49167 0.573237 2.99833 1.71971 1.80056C2.86619 0.602778 4.29371 0.00259259 6.00229 0H46.0014C47.71 0 49.1375 0.600185 50.284 1.80056C51.4305 3.00093 52.0025 4.49556 52 6.28444V63.7194C52 65.5083 51.428 67.003 50.284 68.2033C49.14 69.4037 47.7112 70.0026 45.9977 70ZM5.99857 66.1111H46.0014C46.6675 66.1111 47.2148 65.8868 47.6431 65.4383C48.0715 64.9898 48.2857 64.4168 48.2857 63.7194V6.28055C48.2857 5.58315 48.0715 5.01018 47.6431 4.56167C47.2148 4.11315 46.6675 3.88889 46.0014 3.88889H5.99857C5.33247 3.88889 4.78524 4.11315 4.35686 4.56167C3.92848 5.01018 3.71429 5.58444 3.71429 6.28444V63.7194C3.71429 64.4168 3.92848 64.9898 4.35686 65.4383C4.78524 65.8868 5.33371 66.1111 6.00229 66.1111" fill="#1C3F3A"/>
+                    </svg>
+                </div>
+ 				<h2 class="card-heading">Diagnosis</h2>
+ 				<p class="card-description">Get accurate and personalized health assessments through advanced tools and expert consultations, ensuring a clear understanding of your symptoms.</p>
+                <div class="card-icon1">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25.3557 21.7183C25.253 21.7184 25.1513 21.6982 25.0565 21.659C24.9616 21.6197 24.8754 21.5621 24.8028 21.4895C24.7302 21.4169 24.6726 21.3307 24.6334 21.2359C24.5941 21.141 24.5739 21.0393 24.574 20.9367L24.574 2.93582L1.6013 25.9085C1.45479 26.055 1.25608 26.1373 1.04888 26.1373C0.841676 26.1373 0.642962 26.055 0.496449 25.9085C0.349937 25.762 0.267626 25.5633 0.267625 25.3561C0.267626 25.1489 0.349937 24.9502 0.496449 24.8037L23.4691 1.83097L5.46829 1.83097C5.36564 1.83097 5.26399 1.81075 5.16916 1.77147C5.07432 1.73218 4.98814 1.67461 4.91556 1.60202C4.84297 1.52943 4.78539 1.44326 4.74611 1.34842C4.70683 1.25358 4.68661 1.15194 4.68661 1.04928C4.68661 0.946632 4.70683 0.844985 4.74611 0.750146C4.78539 0.655308 4.84297 0.569136 4.91556 0.49655C4.98815 0.423964 5.07432 0.366385 5.16916 0.327102C5.26399 0.287819 5.36564 0.267599 5.46829 0.267599L25.3557 0.267601C25.4583 0.267543 25.56 0.287723 25.6549 0.326986C25.7497 0.366249 25.8359 0.423827 25.9085 0.496424C25.9811 0.569021 26.0387 0.655217 26.078 0.750081C26.1172 0.844946 26.1374 0.946617 26.1374 1.04929L26.1374 20.9367C26.1374 21.0393 26.1172 21.141 26.078 21.2359C26.0387 21.3307 25.9811 21.4169 25.9085 21.4895C25.8359 21.5621 25.7497 21.6197 25.6549 21.659C25.56 21.6982 25.4583 21.7184 25.3557 21.7183Z" fill="black"/>
+                    </svg>
+                </div>
+ 			</div>
+
+            <div class="what-we-do-card">
+                <div class="card-icon">
+                    <svg width="52" height="70" viewBox="0 0 52 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.4286 56.3889H31.5714V46.6667H40.8571V35H31.5714V25.2778H20.4286V35H11.1429V46.6667H20.4286V56.3889ZM7.42857 70C5.38571 70 3.63752 69.2391 2.184 67.7172C0.730475 66.1954 0.00247619 64.3637 0 62.2222V19.4444C0 17.3056 0.727999 15.4752 2.184 13.9533C3.64 12.4315 5.38819 11.6693 7.42857 11.6667H44.5714C46.6143 11.6667 48.3637 12.4289 49.8197 13.9533C51.2757 15.4778 52.0025 17.3081 52 19.4444V62.2222C52 64.3611 51.2732 66.1928 49.8197 67.7172C48.3662 69.2417 46.6168 70.0026 44.5714 70H7.42857ZM7.42857 62.2222H44.5714V19.4444H7.42857V62.2222ZM3.71429 7.77778V0H48.2857V7.77778H3.71429Z" fill="#1C3F3A"/>
+                    </svg>
+                </div>
+                <h2 class="card-heading">Medication</h2>
+                <p class="card-description">Convenient access to prescribed medications with reminders, refills, and expert guidance, all delivered right to your door.</p>
+                <div class="card-icon1">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25.3557 21.7183C25.253 21.7184 25.1513 21.6982 25.0565 21.659C24.9616 21.6197 24.8754 21.5621 24.8028 21.4895C24.7302 21.4169 24.6726 21.3307 24.6334 21.2359C24.5941 21.141 24.5739 21.0393 24.574 20.9367L24.574 2.93582L1.6013 25.9085C1.45479 26.055 1.25608 26.1373 1.04888 26.1373C0.841676 26.1373 0.642962 26.055 0.496449 25.9085C0.349937 25.762 0.267626 25.5633 0.267625 25.3561C0.267626 25.1489 0.349937 24.9502 0.496449 24.8037L23.4691 1.83097L5.46829 1.83097C5.36564 1.83097 5.26399 1.81075 5.16916 1.77147C5.07432 1.73218 4.98814 1.67461 4.91556 1.60202C4.84297 1.52943 4.78539 1.44326 4.74611 1.34842C4.70683 1.25358 4.68661 1.15194 4.68661 1.04928C4.68661 0.946632 4.70683 0.844985 4.74611 0.750146C4.78539 0.655308 4.84297 0.569136 4.91556 0.49655C4.98815 0.423964 5.07432 0.366385 5.16916 0.327102C5.26399 0.287819 5.36564 0.267599 5.46829 0.267599L25.3557 0.267601C25.4583 0.267543 25.56 0.287723 25.6549 0.326986C25.7497 0.366249 25.8359 0.423827 25.9085 0.496424C25.9811 0.569021 26.0387 0.655217 26.078 0.750081C26.1172 0.844946 26.1374 0.946617 26.1374 1.04929L26.1374 20.9367C26.1374 21.0393 26.1172 21.141 26.078 21.2359C26.0387 21.3307 25.9811 21.4169 25.9085 21.4895C25.8359 21.5621 25.7497 21.6197 25.6549 21.659C25.56 21.6982 25.4583 21.7184 25.3557 21.7183Z" fill="black"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="what-we-do-card">
+                <div class="card-icon">
+                    <i class="fas fa-briefcase-medical fa-3x"></i>
+                </div>
+                <h2 class="card-heading">Emergency services</h2>
+                <p class="card-description">Immediate assistance for urgent health concerns, with 24/7 access to medical professionals and support during critical situations.</p>
+                <div class="card-icon1">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25.3557 21.7183C25.253 21.7184 25.1513 21.6982 25.0565 21.659C24.9616 21.6197 24.8754 21.5621 24.8028 21.4895C24.7302 21.4169 24.6726 21.3307 24.6334 21.2359C24.5941 21.141 24.5739 21.0393 24.574 20.9367L24.574 2.93582L1.6013 25.9085C1.45479 26.055 1.25608 26.1373 1.04888 26.1373C0.841676 26.1373 0.642962 26.055 0.496449 25.9085C0.349937 25.762 0.267626 25.5633 0.267625 25.3561C0.267626 25.1489 0.349937 24.9502 0.496449 24.8037L23.4691 1.83097L5.46829 1.83097C5.36564 1.83097 5.26399 1.81075 5.16916 1.77147C5.07432 1.73218 4.98814 1.67461 4.91556 1.60202C4.84297 1.52943 4.78539 1.44326 4.74611 1.34842C4.70683 1.25358 4.68661 1.15194 4.68661 1.04928C4.68661 0.946632 4.70683 0.844985 4.74611 0.750146C4.78539 0.655308 4.84297 0.569136 4.91556 0.49655C4.98815 0.423964 5.07432 0.366385 5.16916 0.327102C5.26399 0.287819 5.36564 0.267599 5.46829 0.267599L25.3557 0.267601C25.4583 0.267543 25.56 0.287723 25.6549 0.326986C25.7497 0.366249 25.8359 0.423827 25.9085 0.496424C25.9811 0.569021 26.0387 0.655217 26.078 0.750081C26.1172 0.844946 26.1374 0.946617 26.1374 1.04929L26.1374 20.9367C26.1374 21.0393 26.1172 21.141 26.078 21.2359C26.0387 21.3307 25.9811 21.4169 25.9085 21.4895C25.8359 21.5621 25.7497 21.6197 25.6549 21.659C25.56 21.6982 25.4583 21.7184 25.3557 21.7183Z" fill="black"/>
+                    </svg>
+                </div>
+            </div>
+ 		</div>
+ 	</div>
+  
+  <section style="background-color:#D3D3D3" id="aboutus">
+  <div class="container" style="display:flex;" >
+    <img src="{% static 'images/about1.png/' %}" style="height: 400px;" id="news" align="right">
+    <div class="container" style="padding-top: 40px">
+    <h1>About us</h1>
+    <h5 class="mt-5">3C Complete Care Companion is revolutionizing healthcare by making medical services more accessible, efficient, and reliable. Our AI-powered platform seamlessly connects you with expert doctors, provides personalized symptom analysis, and ensures timely and accurate diagnoses. By integrating real-time health tracking, medication reminders, and early disease detection, we empower individuals to take control of their well-being.
+
+        With 24/7 support, hassle-free prescription management, and collaborations with over 10 leading insurance providers, 3C Complete Care Companion simplifies every step of your healthcare journey. Whether you need immediate medical advice, long-term health monitoring, or a guided treatment plan, our platform is designed to cater to your unique health needs.
+        
+        Your health is our priority—trust 3C Complete Care Companion to be your reliable partner in achieving better wellness, every step of the way.</h5>
+    </div>
+  </div>
+</section>
+
+<section id="contactus">
+  <div class="container" style="display:flex;" >
+    <img src="{% static 'images/Contact-us1.jpg/' %}" style="height: 500px;" id="news" align="right">
+    <div class="container" style="padding-top: 40px">
+    <h1>Contact us</h1>
+    <form>
+     <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Phone number</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone number">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+<div class="mb-3">
+  <button type="submit" class="btn" style="background-color: #1C3F3A; color: white;">Submit</button>
+</div>
+   </form>
+    </div>
+  </div>
+</section>
+ 
+
+</section>
+
+
+ </header>
+
+
+
+ 
+{% include "basic_app/footer.html" %}
+  {% endblock %}

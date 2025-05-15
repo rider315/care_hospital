@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<style>
+    .diet-card {
+    }
+    .diet-main {
+        padding-top: 10rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+</style>
+{% extends "basic_app/base.html" %}
+{% load static %}
+
+{% block body_block %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <img src="{% static 'images/diet.png' %}" id="news" align="right">
+        <h1 class="display-4" style="margin-top: 50px;">Diet recommendation!</h1>
+        <p class="lead">Get customized diet recommendations..</p>
+        <div class="container" id="form">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Age</label>
+                    <input type="text" class="form-control" id="age" name="age">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Weight</label>
+                    <input type="text" class="form-control" id="bmi" name="weight">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputAddress" class="form-label">Height</label>
+                    <input type="text" class="form-control" id="height" name="height">
+                </div>
+                <br>
+                <div class="col-12">
+                    <button type="submit" class="btn" style="background-color: #1C3F3A; color: white;">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        {% if bodytype %}
+        <hr>
+        <div class="container diet-main">
+            <div class="card diet-card" style="width: 25rem; border: 2px solid #1C3F3A;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ bodytype }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Suggested food items:</h6>
+                    <ul>
+                        {% for f in food %}
+                        <li>{{ f }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h6 class="card-subtitle mb-2 text-muted">Thank you for taking our recommendation!</h6>
+                </div>
+            </div>
+
+            <div>
+                <!-- Pie Chart Container -->
+                <canvas id="bmiChart" width="300" height="300"></canvas>
+
+                <!-- BMI Category Text -->
+                <div id="bmiCategory" style="text-align: center; margin-top: 20px;">
+                    <!-- This text will be dynamically updated based on BMI -->
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+</div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script for Dynamic Pie Chart and BMI Category Display -->
+<script>
+    const bmi = {{ bmi }};
+    let backgroundColor;
+    let bmiCategory;
+
+    if (bmi < 18) {
+        backgroundColor = 'red';  // Underweight
+        bmiCategory = 'Underweight';
+    } else if (bmi >= 18 && bmi <= 25) {
+        backgroundColor = 'green';  // Healthy
+        bmiCategory = 'Healthy';
+    } else {
+        backgroundColor = 'yellow';  // Overweight
+        bmiCategory = 'Overweight';
+    }
+
+    const ctx = document.getElementById('bmiChart').getContext('2d');
+    const bmiChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['BMI'],
+            datasets: [{
+                label: 'BMI',
+                data: [bmi, 100-bmi],
+                backgroundColor: [backgroundColor, '#f4f4f4'],
+                borderColor: ['#fff', '#fff'],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Display BMI category under the pie chart
+    document.getElementById('bmiCategory').innerText = `You are ${bmiCategory}.`;
+</script>
+
+{% endblock %}

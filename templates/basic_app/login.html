@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% extends "basic_app/base.html" %}
+{% load static %}
+
+{% block body_block %}
+ 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        .loginbox {
+            width: 320px;
+            height: 420px;
+            background: #E8F5E9; /* Light green background matching navbar */
+            color: #2E7D32; /* Darker green text */
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            box-sizing: border-box;
+            padding: 70px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .loginbox h1 {
+            margin: 0;
+            padding: 0 0 20px;
+            text-align: center;
+            font-size: 22px;
+            color: #2E7D32; /* Darker green heading */
+        }
+
+        .loginbox p {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #2E7D32; /* Darker green labels */
+        }
+
+        .loginbox input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .loginbox input[type="text"], 
+        .loginbox input[type="password"] {
+            border: none;
+            border-bottom: 1px solid #2E7D32; /* Darker green underline */
+            background: transparent;
+            outline: none;
+            height: 40px;
+            color: #2E7D32; /* Darker green input text */
+            font-size: 16px;
+        }
+
+        .loginbox input[type="submit"] {
+            border: none;
+            outline: none;
+            height: 40px;
+            background: #2E7D32; /* Darker green button */
+            color: #fff;
+            font-size: 18px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .loginbox input[type="submit"]:hover {
+            background: #1B5E20; /* Slightly darker green on hover */
+        }
+
+        .loginbox a {
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 20px;
+            color: #2E7D32; /* Darker green links */
+        }
+
+        .loginbox a:hover {
+            color: #1B5E20; /* Slightly darker green on hover */
+        }
+    </style>
+
+    {% for message in messages %}
+        <div class="alert alert-danger" style="padding-top: 80px;">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="loginbox">
+        <h1>Login Here</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" name="" value="Login">
+            <a href="#">Lost your password?</a><br>
+            <a href="#">Don't have an account?</a>
+        </form>
+    </div>
+
+{% endblock %}

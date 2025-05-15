@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+{% extends 'basic_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/patient.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+
+<style>
+  .wrapper {
+      display: flex;
+      padding: 5rem 0;
+      width: 100%;
+      justify-content: space-between;
+  }
+  .wrapper_left {
+      background-color: #1C3F3A;
+      color: white;
+      padding: 1rem;
+      width: 20%;
+      font-size: 1.2rem;
+      height: 100vh;
+  }
+  ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+  .wrapper_left li {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 10px;
+  }
+  .wrapper_left li p {
+      margin-top: 0.6rem;
+      margin-left: 0.5rem;
+  }
+  .wrapper_left li:hover {
+      background-color: #0f6674;
+  }
+  .wrapper_right {
+      width: 80%;
+  }
+</style>
+
+<div class="wrapper">
+  <div class="wrapper_left">
+    <ul>
+      <li data-li="dashboard" class="active">
+        <p><i class="fas fa-user"></i> Dashboard</p>
+      </li>
+      <li data-li="book_appointment">
+        <p><i class="fas fa-notes-medical"></i> Book Appointment</p>
+      </li>
+      <li data-li="view_appointment">
+        <p><i class="fas fa-clipboard-list"></i> Manage Appointments</p>
+      </li>
+      <li data-li="prescription">
+        <p><i class="fas fa-address-book"></i> Prescription</p>
+      </li>
+    </ul>
+  </div>
+  <div class="wrapper_right">
+    <div class="container">
+      <div class="item dashboard">
+        <div class="item_info">
+          <div class="img"></div>
+        </div>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <img src="{% static 'images/docpro1.png' %}" style="height: 300px;" id="news" align="right">
+            <h1 class="display-4">Find Your Doctor!</h1>
+            <p class="lead">Find the nearest doctors quickly with our location-based search feature, ensuring you get the care you need, wherever you are.</p>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Location (city)" name="location" required>
+                </div>
+                <div class="col">
+                  <select class="custom-select" name="speciality" id="inputGroupSelect01" required>
+                    <option selected>Speciality</option>
+                    <option value="physician">Physician</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Pediatrician">Pediatrician</option>
+                    <option value="Gynecologist">Gynecologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Eye specialist">Eye specialist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Surgeon">Surgeon</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" name="finddoc" style="background: #1C3F3A">Search</button>
+            </form>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          {% if finddoctor is None %}
+            <h4>No doctor found!</h4>
+          {% else %}
+            {% for x in finddoctor %}
+              <div class="card mb-3" style="max-width: 490px; margin-left: 30px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{% static 'images/docimg.png' %}" style="height: 200px; width: 200px;">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title" style="color: #1C3F3A">{{ x.full_name }}</h5>
+                      <p class="card-text">
+                        <b>Qualification:</b> {{ x.qualification }}<br>
+                        <b>Speciality:</b> {{ x.speciality }}<br>
+                        <b>Hospital Name:</b> {{ x.hospital_name }}<br>
+                        <b>Contact no:</b> {{ x.phone_number }}
+                      </p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="item book_appointment" style="display: none;">
+        <div class="item_info">
+          <div class="img"></div>
+        </div>
+        <div class="container" style="display: flex;">
+          <style type="text/css"> #app { padding-top: 25px; } </style>
+          <img src="{% static 'images/appointment1.png' %}" style="height: 400px; margin-top: 50px;" id="app" align="left">
+          <div id="appform" style="padding-top: 50px;">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="first_name">First Name</label>
+                  <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="last_name">Last Name</label>
+                  <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="tel" class="form-control" name="phone_number" placeholder="Phone number" maxlength="10" minlength="10" pattern="[6-9]{1}[0-9]{9}" required>
+              </div>
+              <div class="form-group">
+                <label for="doctor">Select your doctor</label>
+                <select class="custom-select" name="doctor" required>
+                  <option selected>Select doctor</option>
+                  {% for j in docname %}
+                    <option value="{{ j.full_name }}">{{ j.full_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" class="form-control" name="message" placeholder="Enter your message" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="time">Time</label>
+                  <input type="time" class="form-control" name="time" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="date">Date</label>
+                  <input type="date" class="form-control" name="date" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" name="appointment" style="background: #1C3F3A">Book Appointment</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="item view_appointment" style="display: none;">
+        <div class="item_info">
+          <div class="img"></div>
+        </div>
+        <div style="padding-top: 50px; padding-left: 10px;">
+          <table class="table table-hover table-xxl">
+            <thead style="background: #1C3F3A; color: #fff">
+              <tr>
+                <th scope="col-lg">#</th>
+                <th scope="col-lg">Full Name</th>
+                <th scope="col-lg">Doctor</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Message</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in app %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ i.first_name }} {{ i.last_name }}</td>
+                  <td>{{ i.doctor }}</td>
+                  <td>{{ i.phone_number }}</td>
+                  <td>{{ i.date }}</td>
+                  <td>{{ i.time }}</td>
+                  <td>{{ i.message }}</td>
+                  <td>
+                    <a href="{% url 'editApp' i.id %}"><button type="button" name="edit" class="btn btn-outline-secondary">Update</button></a>
+                    <a href="{% url 'deleteApp' i.id %}"><button type="submit" name="delete" class="btn btn-outline-danger">Delete</button></a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="item prescription" style="display: none;">
+        <div class="item_info">
+          <div class="img"></div>
+        </div>
+        {% for p in pres %}
+          <div class="card" style="max-width: 70rem; margin-left: 30px; margin-top: 50px; border-color: #1C3F3A;">
+            <div class="card-header">{{ p.doctorName }}</div>
+            <div class="card-body" style="color: #1C3F3A;">
+              <div class="container" style="display: flex;">
+                <img src="{% static 'images/RX.png' %}" align="left" style="height: 100px; width: 100px; padding-right: 20px;">
+                <h5 class="card-title">Appointment Date: {{ p.appointmentDate }}</h5>
+                <p class="card-text">
+                  <a class="nav-link" href="{% url 'download_patient' p.id %}"><button class="button button1" style="display:inline-block;">VIEW</button></a>
+                  <a class="nav-link" href="{% url 'login' %}"><button class="button button2" style="display:inline-block;">PAY</button></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var li_elements = document.querySelectorAll(".wrapper_left ul li");
+  var item_elements = document.querySelectorAll(".item");
+  for (var i = 0; i < li_elements.length; i++) {
+    li_elements[i].addEventListener("click", function() {
+      li_elements.forEach(function(li) {
+        li.classList.remove("active");
+      });
+      this.classList.add("active");
+      var li_value = this.getAttribute("data-li");
+      item_elements.forEach(function(item) {
+        item.style.display = "none";
+      });
+      if (li_value == "dashboard") {
+        document.querySelector("." + li_value).style.display = "block";
+      } else if (li_value == "book_appointment") {
+        document.querySelector("." + li_value).style.display = "block";
+      } else if (li_value == "view_appointment") {
+        document.querySelector("." + li_value).style.display = "block";
+      } else if (li_value == "prescription") {
+        document.querySelector("." + li_value).style.display = "block";
+      } else {
+        console.log("");
+      }
+    });
+  }
+</script>
+
+{% endblock %}

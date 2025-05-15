@@ -1,0 +1,1 @@
+web: gunicorn big_project.wsgi:application --bind 0.0.0.0:$PORT
