@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login, logout
@@ -139,7 +139,7 @@ def patient_dashboard(request):
 @login_required
 def editApp(request, pk):
     docname = DoctorProfile.objects.all()
-    editapp = Appointments.objects.get(id=pk)
+    editapp = get_object_or_404(Appointments, id=pk)
 
     if request.method == 'POST':
         print(request.POST)  # Debug POST data
@@ -166,17 +166,30 @@ def editApp(request, pk):
             messages.error(request, f"Please fill in all required fields: {', '.join(missing_fields).replace('_', ' ').title()}")
             return HttpResponseRedirect(reverse('patient_dashboard'))
 
-        Appointments.objects.filter(id=pk).update(
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
-            doctor=doctor,
-            message=message,
-            time=time,
-            date=date
-        )
-        messages.success(request, "Appointment updated successfully!")
-        return HttpResponseRedirect(reverse('patient_dashboard'))
+        # Validate doctor exists
+        doc = DoctorProfile.objects.filter(full_name=doctor)
+        if not doc.exists():
+            messages.error(request, f"No doctor found with name: {doctor}")
+            return HttpResponseRedirect(reverse('patient_dashboard'))
+
+        # Update appointment
+        try:
+            Appointments.objects.filter(id=pk).update(
+                first_name=first_name,
+                last_name=last_name,
+                phone_number=phone_number,
+                doctor=doctor,
+                message=message,
+                time=time,
+                date=date,
+                doctor_username=doc.first().doctor_username
+            )
+            messages.success(request, "Appointment updated successfully!")
+            return HttpResponseRedirect(reverse('patient_dashboard'))
+        except Exception as e:
+            messages.error(request, "Failed to update appointment. Please try again.")
+            print(f"Error updating appointment: {e}")
+            return HttpResponseRedirect(reverse('patient_dashboard'))
 
     context = {'editapp': editapp, 'docname': docname}
     return render(request, 'basic_app/editapp.html', context)
